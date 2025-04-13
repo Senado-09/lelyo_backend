@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: lelyo_backend
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port 10000"
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql+psycopg2://lelyo_user:GviJC37GmfBMJFWiwqxYmA02Xp6iAj1L@dpg-cvu3bl3uibrs73ei59o0-a.oregon-postgres.render.com/lelyo_db
+      - key: SECRET_KEY
+        value: MKMN8RM0MMccyghRsNJZUCGP4C1Ao4LIVOxeF5kx46gC8RUSWdUiBj4KMXOUIoUI_1xPHk21L23Lj7FQDCBMAA
