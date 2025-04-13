@@ -1,2 +1,5 @@
 # Secrets
 .env
+
+# .gitignore
+render.yaml
