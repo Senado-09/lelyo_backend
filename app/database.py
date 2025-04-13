@@ -1,18 +1,17 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import os
+from dotenv import load_dotenv
 
-# 🔧 Configuration MySQL (via WampServer)
-DB_USERNAME = "root"           # par défaut avec Wamp
-DB_PASSWORD = ""               # vide si tu n’as rien mis dans phpMyAdmin
-DB_NAME = "ll_db"       # nom de ta base MySQL (à créer dans phpMyAdmin)
-DB_HOST = "localhost"
-DB_PORT = 3306
+# 🔐 Charger les variables d’environnement depuis .env
+load_dotenv()
 
-SQLALCHEMY_DATABASE_URL = f"mysql+mysqlconnector://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+# 📦 Lire l’URL PostgreSQL définie dans le fichier .env
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-# 🌐 Créer l'engine pour MySQL
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+# 🌐 Créer l'engine pour PostgreSQL
+engine = create_engine(DATABASE_URL)
 
 # ⚙️ Création de la session
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
