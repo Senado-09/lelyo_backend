@@ -8,7 +8,7 @@ from app.routes import auth, property, upload, reservation, task, stats, dashboa
 
 app = FastAPI(
     title="Lelyo API",
-    description="API officielle de Lelyo — plateforme de gestion de biens Airbnb, réservations et tâches.",
+    description="API officielle de Lelyo — plateforme de gestion de biens, réservations et tâches.",
     version="1.0.0",
     contact={
         "name": "Sena DOMONHEDO",
@@ -29,7 +29,7 @@ def root():
     return {
         "project": "Lelyo API",
         "version": "1.0.0",
-        "description": "API robuste pour la gestion de biens Airbnb, réservations et tâches.",
+        "description": "API robuste pour la gestion de biens, réservations et tâches.",
         "developer": {
             "name": "Sena DOMONHEDO",
             "email": "contact@lelyo.dev",
@@ -42,7 +42,7 @@ def root():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], 
+    allow_origins=["https://lelyo.netlify.app"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
