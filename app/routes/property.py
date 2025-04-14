@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app.models.property import Property
@@ -13,23 +13,8 @@ def get_db():
         db.close()
 
 @router.get("/properties")
-def get_properties(request: Request, db: Session = Depends(get_db)):
-    base_url = str(request.base_url).rstrip("/")
-    props = db.query(Property).all()
-
-    result = []
-    for prop in props:
-        image_url = prop.image_url
-        if image_url and not image_url.startswith("http"):
-            image_url = f"{base_url}/{image_url.lstrip('/')}"
-        result.append({
-            "id": prop.id,
-            "name": prop.name,
-            "address": prop.address,
-            "description": prop.description,
-            "image_url": image_url
-        })
-    return result
+def get_properties(db: Session = Depends(get_db)):
+    return db.query(Property).all()
 
 @router.post("/properties")
 def create_property(data: dict, db: Session = Depends(get_db)):
